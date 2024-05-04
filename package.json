@@ -1,20 +1,51 @@
 {
   "name": "exam-wizard-backend",
+  "description": "This is an official starter Turborepo.",
+  "version": "1.0.0",
   "private": true,
+  "keywords": [],
+  "author": "ATLAS2002 <siddharth211102@gmail.com> (https://github.com/ATLAS2002)",
+  "license": "MIT",
+  "packageManager": "pnpm@9.0.6",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "build": "turbo build",
-    "dev": "turbo dev",
+    "dev": "dotenv -- turbo dev",
     "lint": "turbo lint",
+    "codegen": "turbo codegen",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
+    "@config/eslint": "workspace:*",
+    "@config/typescript": "workspace:*",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-turbo": "^1.13.3",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-import-resolver-node": "^0.3.9",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-module-utils": "^2.8.1",
+    "eslint-plugin-eslint-comments": "^3.2.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jest": "^27.9.0",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-only-warn": "^1.1.0",
+    "eslint-plugin-playwright": "^0.16.0",
+    "eslint-plugin-react": "^7.34.1",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-testing-library": "^6.2.2",
+    "eslint-plugin-tsdoc": "^0.2.17",
+    "eslint-plugin-turbo": "^1.13.3",
+    "eslint-plugin-unicorn": "^48.0.1",
+    "eslint-scope": "^7.2.2",
+    "eslint-visitor-keys": "^3.4.3",
     "prettier": "^3.2.5",
+    "prettier-plugin-packagejson": "^2.5.0",
     "turbo": "latest"
   },
-  "packageManager": "pnpm@8.9.0",
-  "engines": {
-    "node": ">=18"
+  "dependencies": {
+    "dotenv-cli": "^7.4.1"
   }
 }

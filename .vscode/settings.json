@@ -3,5 +3,12 @@
     {
       "mode": "auto"
     }
-  ]
+  ],
+  "cSpell.words": ["supergraph"],
+  "material-icon-theme.folders.associations": {
+    "faculty": "Admin",
+    "gateway": "Routes",
+    "role": "Tasks",
+    "student": "Lib"
+  }
 }
