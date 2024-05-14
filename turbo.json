@@ -5,30 +5,34 @@
     "build": {
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"],
-      "dotEnv": [
-        ".env.production.local",
-        ".env.local",
-        ".env.production",
-        ".env"
-      ]
+      "dotEnv": [".env.prod.local", ".env.local", ".env.prod", ".env"]
     },
     "lint": {
       "dependsOn": ["^lint"]
     },
-    "codegen": {
+    "gql:generate": {
       "cache": false,
-      "outputMode": "none",
-      "dependsOn": ["^codegen"]
+      "outputMode": "none"
+    },
+    "db:generate": {
+      "cache": false
+    },
+    "db:migrate": {
+      "cache": false
+    },
+    "db:push": {
+      "cache": false
+    },
+    "db:check": {
+      "cache": false
+    },
+    "db:studio": {
+      "cache": false
     },
     "dev": {
       "cache": false,
       "persistent": true,
-      "dotEnv": [
-        ".env.development.local",
-        ".env.local",
-        ".env.development",
-        ".env"
-      ]
+      "dotEnv": [".env.dev.local", ".env.local", ".env.dev", ".env"]
     },
     "test": {
       "dependsOn": ["^test"],
