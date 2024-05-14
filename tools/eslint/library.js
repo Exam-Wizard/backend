@@ -6,10 +6,6 @@ const project = resolve(process.cwd(), "tsconfig.json");
 module.exports = {
   extends: ["eslint:recommended", "prettier", "eslint-config-turbo"],
   plugins: ["only-warn"],
-  globals: {
-    React: true,
-    JSX: true,
-  },
   env: {
     node: true,
   },
@@ -20,12 +16,7 @@ module.exports = {
       },
     },
   },
-  ignorePatterns: [
-    // Ignore dotfiles
-    ".*.js",
-    "node_modules/",
-    "dist/",
-  ],
+  ignorePatterns: [".*.js", "node_modules/", "dist/"],
   overrides: [
     {
       files: ["*.js?(x)", "*.ts?(x)"],
