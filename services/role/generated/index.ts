@@ -1,5 +1,5 @@
 import { GraphQLResolveInfo } from 'graphql';
-import { IContext } from '../context';
+import { IContext } from '../graphql/context';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -18,27 +18,73 @@ export type Scalars = {
   _FieldSet: { input: any; output: any; }
 };
 
-export type Query = {
-  __typename?: 'Query';
-  role?: Maybe<Role>;
-  roles: Array<Role>;
+export type Faculty = {
+  __typename?: 'Faculty';
+  id: Scalars['ID']['output'];
 };
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  Role?: Maybe<RoleMutations>;
+};
 
-export type QueryRoleArgs = {
+export type NewRole = {
+  isUnique: Scalars['Boolean']['input'];
   name: Scalars['String']['input'];
+};
+
+export type Permissions = {
+  __typename?: 'Permissions';
+  description: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+};
+
+export type Query = {
+  __typename?: 'Query';
+  Role: RoleQueries;
 };
 
 export type Role = {
   __typename?: 'Role';
+  assignees: Array<Faculty>;
+  isUnique: Scalars['Boolean']['output'];
   name: Scalars['ID']['output'];
-  permissions: Array<Scalars['String']['output']>;
-  users: Array<User>;
+  permissions: Array<Permissions>;
 };
 
-export type User = {
-  __typename?: 'User';
-  name: Scalars['String']['output'];
+export type RoleMutations = {
+  __typename?: 'RoleMutations';
+  assign?: Maybe<Faculty>;
+  create?: Maybe<Role>;
+  unassign?: Maybe<Faculty>;
+};
+
+
+export type RoleMutationsAssignArgs = {
+  faculty: Scalars['ID']['input'];
+  role: Scalars['ID']['input'];
+};
+
+
+export type RoleMutationsCreateArgs = {
+  data: NewRole;
+};
+
+
+export type RoleMutationsUnassignArgs = {
+  faculty: Scalars['ID']['input'];
+  role: Scalars['ID']['input'];
+};
+
+export type RoleQueries = {
+  __typename?: 'RoleQueries';
+  getAll: Array<Role>;
+  getByName?: Maybe<Role>;
+};
+
+
+export type RoleQueriesGetByNameArgs = {
+  name: Scalars['String']['input'];
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -124,45 +170,84 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
-  Query: ResolverTypeWrapper<{}>;
-  String: ResolverTypeWrapper<Scalars['String']['output']>;
-  Role: ResolverTypeWrapper<Role>;
+  Faculty: ResolverTypeWrapper<Faculty>;
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
-  User: ResolverTypeWrapper<User>;
+  Mutation: ResolverTypeWrapper<{}>;
+  NewRole: NewRole;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
+  String: ResolverTypeWrapper<Scalars['String']['output']>;
+  Permissions: ResolverTypeWrapper<Permissions>;
+  Query: ResolverTypeWrapper<{}>;
+  Role: ResolverTypeWrapper<Role>;
+  RoleMutations: ResolverTypeWrapper<RoleMutations>;
+  RoleQueries: ResolverTypeWrapper<RoleQueries>;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
-  Query: {};
-  String: Scalars['String']['output'];
-  Role: Role;
+  Faculty: Faculty;
   ID: Scalars['ID']['output'];
-  User: User;
+  Mutation: {};
+  NewRole: NewRole;
   Boolean: Scalars['Boolean']['output'];
+  String: Scalars['String']['output'];
+  Permissions: Permissions;
+  Query: {};
+  Role: Role;
+  RoleMutations: RoleMutations;
+  RoleQueries: RoleQueries;
 }>;
 
-export type QueryResolvers<ContextType = IContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
-  role?: Resolver<Maybe<ResolversTypes['Role']>, ParentType, ContextType, RequireFields<QueryRoleArgs, 'name'>>;
-  roles?: Resolver<Array<ResolversTypes['Role']>, ParentType, ContextType>;
-}>;
-
-export type RoleResolvers<ContextType = IContext, ParentType extends ResolversParentTypes['Role'] = ResolversParentTypes['Role']> = ResolversObject<{
-  __resolveReference?: ReferenceResolver<Maybe<ResolversTypes['Role']>, { __typename: 'Role' } & GraphQLRecursivePick<ParentType, {"name":true}>, ContextType>;
-  name?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  permissions?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
-  users?: Resolver<Array<ResolversTypes['User']>, ParentType, ContextType>;
+export type FacultyResolvers<ContextType = IContext, ParentType extends ResolversParentTypes['Faculty'] = ResolversParentTypes['Faculty']> = ResolversObject<{
+  __resolveReference?: ReferenceResolver<Maybe<ResolversTypes['Faculty']>, { __typename: 'Faculty' } & GraphQLRecursivePick<ParentType, {"id":true}>, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
-export type UserResolvers<ContextType = IContext, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = ResolversObject<{
+export type MutationResolvers<ContextType = IContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
+  Role?: Resolver<Maybe<ResolversTypes['RoleMutations']>, ParentType, ContextType>;
+}>;
+
+export type PermissionsResolvers<ContextType = IContext, ParentType extends ResolversParentTypes['Permissions'] = ResolversParentTypes['Permissions']> = ResolversObject<{
+  __resolveReference?: ReferenceResolver<Maybe<ResolversTypes['Permissions']>, { __typename: 'Permissions' } & GraphQLRecursivePick<ParentType, {"name":true}>, ContextType>;
+  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type QueryResolvers<ContextType = IContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
+  Role?: Resolver<ResolversTypes['RoleQueries'], ParentType, ContextType>;
+}>;
+
+export type RoleResolvers<ContextType = IContext, ParentType extends ResolversParentTypes['Role'] = ResolversParentTypes['Role']> = ResolversObject<{
+  __resolveReference?: ReferenceResolver<Maybe<ResolversTypes['Role']>, { __typename: 'Role' } & GraphQLRecursivePick<ParentType, {"name":true}>, ContextType>;
+  assignees?: Resolver<Array<ResolversTypes['Faculty']>, ParentType, ContextType>;
+  isUnique?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  permissions?: Resolver<Array<ResolversTypes['Permissions']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type RoleMutationsResolvers<ContextType = IContext, ParentType extends ResolversParentTypes['RoleMutations'] = ResolversParentTypes['RoleMutations']> = ResolversObject<{
+  assign?: Resolver<Maybe<ResolversTypes['Faculty']>, ParentType, ContextType, RequireFields<RoleMutationsAssignArgs, 'faculty' | 'role'>>;
+  create?: Resolver<Maybe<ResolversTypes['Role']>, ParentType, ContextType, RequireFields<RoleMutationsCreateArgs, 'data'>>;
+  unassign?: Resolver<Maybe<ResolversTypes['Faculty']>, ParentType, ContextType, RequireFields<RoleMutationsUnassignArgs, 'faculty' | 'role'>>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type RoleQueriesResolvers<ContextType = IContext, ParentType extends ResolversParentTypes['RoleQueries'] = ResolversParentTypes['RoleQueries']> = ResolversObject<{
+  getAll?: Resolver<Array<ResolversTypes['Role']>, ParentType, ContextType>;
+  getByName?: Resolver<Maybe<ResolversTypes['Role']>, ParentType, ContextType, RequireFields<RoleQueriesGetByNameArgs, 'name'>>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type Resolvers<ContextType = IContext> = ResolversObject<{
+  Faculty?: FacultyResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
+  Permissions?: PermissionsResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Role?: RoleResolvers<ContextType>;
-  User?: UserResolvers<ContextType>;
+  RoleMutations?: RoleMutationsResolvers<ContextType>;
+  RoleQueries?: RoleQueriesResolvers<ContextType>;
 }>;
 
