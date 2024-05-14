@@ -1,0 +1,18 @@
+{
+  "name": "@package/store",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@config/typescript": "workspace:*",
+    "@types/node": "^20.12.8",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@package/auth": "workspace:*",
+    "@package/db": "workspace:*",
+    "drizzle-orm": "^0.30.10",
+    "zod": "^3.23.6"
+  }
+}
