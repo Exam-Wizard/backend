@@ -15,8 +15,9 @@
     "graphql": "^16.8.1"
   },
   "devDependencies": {
-    "@config/typescript": "workspace:*",
     "@config/codegen": "workspace:*",
+    "@config/typescript": "workspace:*",
+    "@types/node": "^20.12.8",
     "tsx": "^4.8.2",
     "typescript": "^5.3.3"
   }
