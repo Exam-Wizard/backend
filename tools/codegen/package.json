@@ -1,0 +1,14 @@
+{
+  "name": "@config/codegen",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@config/typescript": "workspace:*",
+    "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/typescript": "^4.0.6",
+    "@graphql-codegen/typescript-resolvers": "^4.0.6",
+    "typescript": "^5.3.3"
+  }
+}
