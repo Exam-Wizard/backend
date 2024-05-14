@@ -1,0 +1,47 @@
+extend schema
+  @link(
+    url: "https://specs.apollo.dev/federation/v2.3"
+    import: ["@key", "@shareable"]
+  )
+
+extend type Role @key(fields: "name") {
+  name: ID!
+}
+
+type Faculty @key(fields: "id") @shareable {
+  id: ID!
+  name: String!
+  email: String!
+  image: String
+  roles: [Role!]
+}
+
+type FacultyQueries {
+  getByID(id: ID!): Faculty
+  getAll: [Faculty!]!
+}
+
+type Query {
+  Faculty: FacultyQueries!
+}
+
+type FacultyMutations {
+  register(data: NewFaculty!): Session
+  login(email: String!, password: String!): Session
+}
+
+type Mutation {
+  Faculty: FacultyMutations!
+}
+
+type Session {
+  token: String!
+  user: Faculty!
+}
+
+input NewFaculty {
+  name: String!
+  email: String!
+  password: String!
+  image: String
+}

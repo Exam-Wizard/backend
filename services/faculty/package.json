@@ -1,0 +1,27 @@
+{
+  "name": "@service/faculty",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsc --outDir dist",
+    "start": "node dist/index.js",
+    "dev": "tsx watch index.ts",
+    "type-check": "tsc --noEmit",
+    "gql:generate": "gql-gen --config codegen.ts"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.10.4",
+    "@apollo/subgraph": "^2.7.4",
+    "@package/auth": "workspace:*",
+    "@package/db": "workspace:*",
+    "@package/store": "workspace:*",
+    "graphql": "^16.8.1",
+    "graphql-tag": "^2.12.6"
+  },
+  "devDependencies": {
+    "@config/codegen": "workspace:*",
+    "@config/typescript": "workspace:*",
+    "@graphql-codegen/cli": "^5.0.2",
+    "tsx": "^4.8.2",
+    "typescript": "^5.3.3"
+  }
+}
