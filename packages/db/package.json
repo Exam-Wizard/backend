@@ -1,0 +1,28 @@
+{
+  "name": "@package/db",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./index.ts",
+  "scripts": {
+    "build": "tsc",
+    "start": "node ./dist/index.js",
+    "dev": "tsx watch index.ts",
+    "db:check": "drizzle-kit check:pg",
+    "db:generate": "drizzle-kit generate:pg",
+    "db:migrate": "NODE_ENV=migration tsx scripts/migrate.ts",
+    "db:push": "drizzle-kit push:pg",
+    "db:seed": "tsx scripts/seed.ts",
+    "db:studio": "drizzle-kit studio --port 3000 --verbose"
+  },
+  "devDependencies": {
+    "@config/typescript": "workspace:*",
+    "@types/node": "^20.12.8",
+    "drizzle-kit": "^0.20.17",
+    "tsx": "^4.8.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.30.10",
+    "postgres": "^3.4.4"
+  }
+}
