@@ -5,36 +5,26 @@ import {
   IntrospectAndCompose,
   RemoteGraphQLDataSource,
 } from "@apollo/gateway";
-import { decode } from "@shared/jwt";
-import { GraphQLError } from "graphql";
-import type { IncomingMessage } from "http";
-
-const context = async ({ req }: { req: IncomingMessage }) => {
-  try {
-    const token = decode(req);
-    console.log(token);
-    return { token };
-  } catch (error) {
-    throw new GraphQLError(error as string, {
-      extensions: { code: "UNAUTHENTICATED", http: { status: 401 } },
-    });
-  }
-};
+import { context } from "./context";
 
 const gateway = new ApolloGateway({
   buildService({ url }) {
     return new RemoteGraphQLDataSource({
       url,
       willSendRequest({ request, context }) {
-        request.http?.headers.set("token", JSON.stringify(context.token));
+        request.http?.headers.set("session", JSON.stringify(context));
       },
     });
   },
   supergraphSdl: new IntrospectAndCompose({
     subgraphs: [
       {
-        name: "roles",
+        name: "FACULTY_SERVICE",
         url: "http://localhost:4001",
+      },
+      {
+        name: "ROLE_SERVICE",
+        url: "http://localhost:4002",
       },
     ],
   }),
@@ -45,5 +35,5 @@ const server = new ApolloServer({ gateway });
 startStandaloneServer(server, { context, listen: { port: 4000 } }).then(
   ({ url }) => {
     console.log(`🚀 Gateway ready at ${url}`);
-  }
+  },
 );

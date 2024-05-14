@@ -1,5 +1,5 @@
 {
-  "name": "gateway",
+  "name": "@service/gateway",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
@@ -11,11 +11,12 @@
   "dependencies": {
     "@apollo/gateway": "^2.7.4",
     "@apollo/server": "^4.10.4",
-    "@shared/jwt": "workspace:*",
+    "@package/auth": "workspace:*",
     "graphql": "^16.8.1"
   },
   "devDependencies": {
     "@config/typescript": "workspace:*",
+    "@config/codegen": "workspace:*",
     "tsx": "^4.8.2",
     "typescript": "^5.3.3"
   }
